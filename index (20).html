@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>MAMPUS LU WKWKWK</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;font-family:Arial,sans-serif}
+body{background:linear-gradient(135deg,#f7fbff,#dff1ff);color:#17202a}
+#screen{min-height:100%;display:flex;align-items:center;justify-content:center;padding:24px}
+.card{width:min(430px,100%);background:#fff;border-radius:24px;padding:30px 22px;
+box-shadow:0 18px 50px #0002;text-align:center}
+h1{margin:0 0 24px;font-size:30px}
+input{width:100%;padding:15px;border:2px solid #d6dee8;border-radius:14px;
+font-size:20px;text-align:center;outline:none}
+button{width:100%;margin-top:14px;padding:15px;border:0;border-radius:14px;
+font-size:17px;font-weight:700;cursor:pointer;background:#1976d2;color:white}
+#lock{display:none;position:fixed;inset:0;background:linear-gradient(135deg,#ffffff,#e9f6ff);
+z-index:10;align-items:center;justify-content:center;text-align:center;padding:25px}
+.lockbox{width:min(500px,100%)}
+.lockbox h2{font-size:38px;margin:0 0 30px;word-break:break-word}
+.msg{min-height:26px;margin-top:14px;color:#d32f2f;font-weight:700}
+small{display:block;margin-top:16px;color:#667}
+</style>
+</head>
+<body>
+<div id="screen">
+  <div class="card">
+    <h1>Panel Kunci</h1>
+    <p>Masukkan PIN untuk membuka halaman.</p>
+    <input id="pin" type="password" inputmode="numeric" maxlength="7" placeholder="PIN">
+    <button onclick="unlock()">BUKA</button>
+    <div id="msg" class="msg"></div>
+    <button onclick="lockPage()">KUNCI LAYAR</button>
+    <small>Kunci ini hanya mengunci tampilan halaman web, bukan sistem Android.</small>
+  </div>
+</div>
+
+<div id="lock">
+  <div class="lockbox">
+    <h2>MAMPUS LU WKWKWK</h2>
+    <input id="unlockPin" type="password" inputmode="numeric" maxlength="7" placeholder="Masukkan PIN">
+    <button onclick="unlockLocked()">BUKA</button>
+    <div id="lockMsg" class="msg"></div>
+  </div>
+</div>
+
+<script>
+const PIN="3938373";
+
+function lockPage(){
+  document.getElementById("lock").style.display="flex";
+  document.getElementById("unlockPin").focus();
+  document.documentElement.requestFullscreen?.().catch(()=>{});
+}
+
+function unlock(){
+  const v=document.getElementById("pin").value;
+  if(v===PIN){ document.getElementById("msg").textContent="PIN benar."; }
+  else document.getElementById("msg").textContent="PIN salah.";
+}
+
+function unlockLocked(){
+  const v=document.getElementById("unlockPin").value;
+  const m=document.getElementById("lockMsg");
+  if(v===PIN){
+    document.getElementById("lock").style.display="none";
+    m.textContent="";
+    document.getElementById("unlockPin").value="";
+    document.exitFullscreen?.().catch(()=>{});
+  }else{
+    m.textContent="PIN salah.";
+  }
+}
+</script>
+</body>
+</html>
